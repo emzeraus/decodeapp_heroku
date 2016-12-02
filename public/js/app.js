@@ -50,7 +50,7 @@ class Component extends App{
 	ukayLayout(){
 		let html = `
 			 <nav>
-			    <div class="nav-wrapper blue darken-4">
+			    <div class="nav-wrapper  blue-grey lighten-1">
 			      <a href="#" class="brand-logo yellow-text ">UKAY</a>
 			      <ul id="nav-mobile" class="right hide-on-med-and-down">
 			        <li><a href="#">Items</a></li>
@@ -84,7 +84,7 @@ class Component extends App{
 
 					</ul>
 				  </div>
-				<footer class="page-footer blue darken-4">		          
+				<footer class="page-footer blue-grey">		          
 		          <div class="footer-copyright">
 		            <div class="container">
 		            © 2016 - Another decode App
