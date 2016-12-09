@@ -137,7 +137,7 @@
 
 				<nav class="green accent-4">
 					<div class="nav-wrapper">
-						<a href="app.html" class="brand-logo">Bookworm <img src="img/book.jpg" height="30" width="40"></i></a>
+						<a href="app.html" class="brand-logo">Bookworms <img src="img/book.jpg" height="30" width="40"></i></a>
 							<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 							<ul class="right hide-on-med-and-down">
 							<li><a href="#" onclick="component.bookList()" >Books</a></li>
@@ -155,7 +155,7 @@
 					<div id="bookList"></div>
 					<div id="bookCreate"></div>
 
-				<div class="frontPage">
+				<div class="carouselLandingPage">
 					<h1 class="green accent-4" "green-text"><center>Best Books</center margin="10px"></h1>
 					 <div class="carousel">
 					    <a class="carousel-item" href="#one!"><img src="img/awalktoremember.jpg"></a>
@@ -171,15 +171,11 @@
 					<div class="footer">
 						<div class="row">
 							<div class="col 16 s12">
-				<p class="black-text text-lighten-4">“Books are the ultimate Dumpees: put them down and they’ll wait for you forever; pay attention to them and they always love you back.” 
-					― John Green, An Abundance of Katherines</p>
+				<p class="black-text text-lighten-4"><center>“Books are the ultimate Dumpees: put them down and they’ll wait for you forever; <br> pay attention to them and they always love you back.” <br>
+					― John Green, An Abundance of Katherines"</center></p>
+					<center>© 2016 Copyright Text</center>
 							</div>
 						</div>
-					<div class="footer-copyright">
-						<div class="black-text">
-							<center>© 2016 Copyright Text</center>
-						</div>
-					</div>
 				</div>
 				</footer>			
 
