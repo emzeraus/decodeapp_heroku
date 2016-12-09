@@ -274,8 +274,6 @@
 						<form>
 							<div class="input-field">				
 								<input onkeyup="component.bookListItems(this.value)" id="search" type="search" placeholder="Search" required>
-								<label for="search"><i class="material-icons"></i></label>
-								<i class="material-icons"></i>
 							</div>
 						</form>
 					</div>
