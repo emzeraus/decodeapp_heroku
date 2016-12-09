@@ -187,7 +187,7 @@
 				`,document.getElementById("app"));		
 		}
 
-		bookRecent(){
+			bookRecent(){
 			
 			let html = `
 				<h5 class="center-align">Recent Added</h5>
@@ -221,7 +221,7 @@
 
 
 			this.reRender(html,document.getElementById("bookRecent"));
-			$('.frontPage').hide();
+			$('.carouselLandingPage').hide();
 			}
 
 		bookView(id){
@@ -256,13 +256,14 @@
 				${html}			
 				`,document.getElementById("bookView"));
 			//hide page 1
-			$('.frontPage').hide();
+			$('#landingPage').hide();
+			$('.carouselLandingPage').hide();
 			$('#bookView').show();
 			$('#bookRecent').hide();
 			$('#bookList').hide();
 			$('#bookCreate').hide();
 		}
-	bookList(){
+		bookList(){
 			let html = `
 				<br/>
 			  	<nav>
@@ -270,6 +271,8 @@
 						<form>
 							<div class="input-field">				
 								<input onkeyup="component.bookListItems(this.value)" id="search" type="search" placeholder="Search" required>
+								<label for="search"><i class="material-icons">search</i></label>
+								<i class="material-icons">close</i>
 							</div>
 						</form>
 					</div>
@@ -306,11 +309,11 @@
 				${html}
 				`,document.getElementById("bookList"));
 			$('landingPage').hide();
+			$('.carouselLandingPage').hide();
 			$('#bookList').show();
 			$('#bookView').hide();
 			$('#bookRecent').hide();
 			$('#bookCreate').hide();
-			$('.frontPage').hide();
 				
 		}
 		bookListItems(title){
@@ -319,7 +322,7 @@
 			for(let i=0;i<r.length;i++){
 				html+= `
 					<div class="col s12 m4">
-						<div class="card small hoverable">
+						<div class="card large hoverable">
 							<div class="card-image">
 								<img src="${r[i].photo}">
 								<span class="card-title">${r[i].title}</span>
@@ -338,6 +341,7 @@
 				${html}
 				`,document.getElementById("bookListItems"));
 			$('#landingPage').hide();
+			$('.carouselLandingPage').hide();
 			$('#bookList').show();
 			$('#bookView').hide();
 			$('#bookRecent').hide();
@@ -389,11 +393,11 @@
 				${html}
 				`,document.getElementById("bookCreate"));
 			$('#landingPage').hide();
+			$('.carouselLandingPage').hide();
 			$('#bookCreate').show();
 			$('#bookList').hide();
 			$('#bookView').hide();
 			$('#bookRecent').hide();
-			$('.frontPage').hide();
 	}
 	}
 	let component = new Component();
