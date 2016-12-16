@@ -1,16 +1,11 @@
-.container{
-  margin-left: 150px;
-  width:100%;
+.nav{
+  list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    width: 100%;
 }
-
-.brand-logo{
-  margin-left:10px;  
-}
-
-.frontPage{
-	margin-top: 20px;
-}
-
 .footer{
-	margin: 50px;
+  margin-top: 50px;
 }

@@ -1,9 +1,8 @@
-	"use strict";
+"use strict";
 
-	class App{
-		constructor(){
-
-			this.book = [
+class App{
+	constructor(){
+		this.book = [
 		{
 			"id": 1,
 			"title": "The Notebook",
@@ -59,346 +58,313 @@
 			"photo":"img/mebeforeyou.jpg"
 		}
 		];
-		}
+	}
 
-		render(html,component){
-			
-			component.innerHTML = html;
-		}
+	render(html, component){
 
-		reRender(html,component){
-			
-			component.innerHTML += html;
-		}
+		component.innerHTML += html;
+	}
 
-		createBook(){
+	reRender(html, component){
 
-		let id = document.getElementById('book_id');
-		let title = document.getElementById('book_title');
-		let year = document.getElementById('book_year');
-		let author = document.getElementById('book_author');
-		let characters = document.getElementById('book_characters');
-		let summary = document.getElementById('book_summary');
+		component.innerHTML = html;
+	}
 
-		let book = {
-		"id": id.value,
-		"title": title.value,
-		"year": year.value,
-		"author": author.value,
-		"characters": characters.value,
-		"summary": summary.value,
-		};
+	createBook(){
+		let z = document.getElementById('newTitle');
+		let x = document.getElementById('newYear');
+		let c = document.getElementById('newAuthor');
+		let v = document.getElementById('newSummary');
+		let b = document.getElementById('newPhoto');
 
+		let book = {"title":z.value,"year":x.value,"author":c.value,"summary":v.value,"photo":b.value};
 		this.book.push(book);
-		}
 
-		deleteBook(key){
-		let r = this.book;
-		for(let i=0;i<r.length;i++){
-			if(r[i].id == key){
-			this.book.splice(i,1);
-			break;
-			}
-		}
-		this.pageLayout();
-		}
+		z.value = x.value = c.value = v.value = b.value = ''; //Clear Fields
+		this.bookListInfo();
+	}
 
-		findBookById(id){
-		let r = this.book;
-		for (let i=0;i<r.length;i++){
-			if(id==r[i].id){
-				return r[i];
-				}
-			}
-		}
+	deleteBook(key){	
+		let table = document.getElementById('bookListInfo');
+		table.deleteRow(key);
+		this.book.splice(key,1);
 
-		findBookByTitle(title){
+		// let m = this.movies;
+		// let dummy = [];
+		// for(let i=0;i<m;i++){
+		// 	if(key!=i){
+		// 		dummy.push(m[i]);
+		// 	}
+		// }
+		// this.movies = dummy;
+		let details = document.getElementById('bookDetails');
+		details.innerHTML = "";
+		
+		this.bookListInfo();	
+		this.showBookList();	
+	}
+
+	updateBook(key){
+
+		let z = document.getElementById('updateTitle');
+		let x = document.getElementById('updateYear');
+		let c = document.getElementById('updateAuthor');
+		let v = document.getElementById('updateSummary');
+		let b = document.getElementById('updateCharacters');
+		
+		let m = this.book[key];
+		let book = {"id":m.id,"title":z.value,"year":x.value,"author":c.value,"summary":v.value,"photo":m.photo,"characters":b.value};
+		//this.book.push(book);
+
+		this.book[key] = book;
+		let details = document.getElementById('bookDetails');
+		details.innerHTML = "";
+		
+		this.bookListInfo();
+		this.showBookList();
+	}
+
+	showLandingPage(){
+		$('#landingPage').show();
+		$('#createpage').hide();
+		$('#readpage').hide();
+		$('#updatedeletepage').hide();
+	}	
+
+	showBookList(){
+		$('#landingPage').hide();
+		$('#createpage').hide();
+		$('#readpage').show();
+		$('#updatedeletepage').hide();
+	}
+
+	showBookCreate(){
+		$('#landingPage').hide();
+		$('#createpage').show();		
+		$('#readpage').hide();
+		$('#updatedeletepage').hide();
+	}
+
+	showUpdateDelete(){
+		$('#landingPage').hide();
+		$('#createpage').hide();		
+		$('#readpage').hide();
+		$('#updatedeletepage').show();
+	}	
+
+	searchBook(value=""){
 		let objects = [];
 		let r = this.book;
-		for (let i=0; i<r.length; i++){
-			let expr = (r[i].title.toUpperCase().indexOf(title.toUpperCase()) > -1);
-			if(expr){
+		for(let i=0;i<r.length;i++){
+			let expr1 = (r[i].title.toUpperCase().indexOf(value.toUpperCase()) > -1);
+			if(expr1){
 				objects.push(r[i]);
 			}
 		}
-		return objects;
-
-		}
-
+		return objects;		
 	}
-	class Component extends App{
-		constructor(){
+}
 
-			super();
-		}
-			landingPage(){
-			let html = `
+class Component extends App{
+	constructor(){
+		super();
+	}
+
+	bookList(){
+		this.render(
+			`
 
 
-				<nav class="green accent-4">
-					<div class="nav-wrapper">
-						<a href="app.html" class="brand-logo">Bookworms <img src="img/book.jpg" height="30" width="40"></i></a>
-							<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-							<ul class="right hide-on-med-and-down">
-							<li><a href="#" onclick="component.bookList()" >Books</a></li>
-							<li><a href="#" onclick="component.bookCreate()">Create</a></li>
-							</ul>
-							<ul class="side-nav" id="mobile-demo">
-							<li><a href="#" onclick="component.bookList()" >Books</a></li>
-							<li><a href="#" onclick="component.bookCreate()">Create</a></li>
-							</ul>
-						</div>
-					</nav>
+<nav class="navbar navbar-light bg-inverse">
+  <ul class="nav navbar-nav">
+    <li class="nav-item active">
+      <a href="#" onclick="component.showLandingPage()">Home</a>
+    </li>
+    <li class="nav-item">
+      <a href="#"  onclick="component.showBookList()" >Book List</a>
+    </li>
+    <li class="nav-item">
+     <a href="#" onclick="component.showBookCreate()">Book Create</a>
+    </li>
+  </ul>
+</nav>
 
-					<div id="bookRecent"></div>
-					<div id="bookView"></div>
-					<div id="bookList"></div>
-					<div id="bookCreate"></div>
+       	<div id="landingPage">
+			<div class="container">
+          		<center><img src="img/1.jpg" width="500" height="500"></center>
+          </div>
 
-				<div class="carouselLandingPage">
-					<h1 class="green accent-4" "green-text"><center>Best Books</center margin="10px"></h1>
-					 <div class="carousel">
-					    <a class="carousel-item" href="#one!"><img src="img/awalktoremember.jpg"></a>
-					    <a class="carousel-item" href="#two!"><img src="img/thefaultinourstars.jpg"></a>
-					    <a class="carousel-item" href="#three!"><img src="img/thenotebook.jpg"></a>
-					 </div>
-					 <br>
-				<center><a class="waves-effect waves-light btn" href="#" onclick="component.bookRecent()">Recent Book</a></center>
-					  
+  
 
-					<hr>
-					<footer class="light-green accent-4">
-					<div class="footer">
+		</div>
+				
+				<div id="createpage" class="row marketing">
+					<div class="col col-sm-12">
+						<div id="bookCreate"></div>						
+					</div>
+				</div>
+
+				<div id="readpage" class="row marketing">
+					<div class="col col-sm-12">
+						<h1><center>Book List</center></h1>
+						<table id="bookList" class="table">
+							<thead>
+								<tr>
+									<th>Title</th>
+									<th>Year</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<div class="form-group">
+							    <div class="input-group">
+							      <input oninput="component.bookListInfo(this.value)" type="text" class="form-control" placeholder="Search">
+							    </div>
+							  </div>
+							<tbody id="bookListInfo"></tbody>
+						</table>
+					</div>
+				</div>
+
+				<div id="updatedeletepage" class="row marketing">
+					<div id="bookDetails"></div>
+				</div>
+				
+         <div class="footer">
 						<div class="row">
-							<div class="col 16 s12">
-				<p class="black-text text-lighten-4"><center>“Books are the ultimate Dumpees: put them down and they’ll wait for you forever; <br> pay attention to them and they always love you back.” <br>
-					― John Green, An Abundance of Katherines"</center></p>
+						<div class="col-sm-9 col-md-8 col-lg-12" style="background-color: #EA4928;">
+				<p><b><center>“Books are the ultimate Dumpees: put them down and they’ll wait for you forever; <br> pay attention to them and they always love you back.” <br>
+					― John Green, An Abundance of Katherines"</center></b></p>
 					<center>© 2016 Copyright Text</center>
 							</div>
 						</div>
 				</div>
 				</footer>			
 
+			`
+			,document.getElementById('app'));
+		this.bookListInfo();
+		$('#landingpage').show();
+		$('#createpage').hide();		
+		$('#readpage').hide();
+	}
 
-			`;
-			this.render(`
-				${html}
-
-				`,document.getElementById("app"));		
-		}
-
-			bookRecent(){
-			
-			let html = `
-				<h5 class="center-align">Recent Added</h5>
-				<div class="row">
-			`;
-
-			let r = this.book;
-			let count = 0;
-			for(let i=(r.length-1);i>=0;i--){
-				if(count++ === 3)break;
-				html+= `
-					<div class="col s12 m4">
-						<div class="card large hoverable">
-							<div class="card-image">
-								<img src="${r[i].photo}">
-								<span class="card-title">${r[i].title}</span>
-							</div>
-							<div class="card-content">
-								<p>${r[i].summary}</p>
-							</div>
-							<div class="card-action">
-								<a href="#" onclick="component.bookView(${r[i].id})">More</a>
-							</div>
-						</div>
-					</div>
-				`;
-			}
-
-			html += `</div>`;
-
-
-
-			this.reRender(html,document.getElementById("bookRecent"));
-			$('.carouselLandingPage').hide();
-			}
-
-		bookView(id){
-			let r = this.findBookById(id);
-
-			let html = `
-				<h5 class="center-align">${r.title}</h5>
-				<div class="row">				
-					<div class="col s12 m12">
-						<div class="card horizontal large">
-							<div class="card-image">
-								<img src="${r.photo}">
-							</div>
-							<div class="card-stacked">
-								<div class="card-content">
-									<p>Summary: ${r.summary}</p>
-									<p>Year: ${r.year}</p>
-									<p>Author: ${r.author}</p>
-									<p>Character: ${r.characters}</p>
-								</div>
-								<div class="card-action small">		
-									<span onclick="component.deleteBook(${r.id})" class="new badge small blue" data-badge-caption="">EDIT</span>						
-									<span onclick="component.deleteBook(${r.id})" class="new badge small red" data-badge-caption="">DELETE</span>
-									<span onclick="component.landingPage()" class="new badge small" data-badge-caption="">BACK TO HOME</span>
-								</div>
-							</div>					
-						</div>				
-					</div>			
-				</div>
-			`;
-			this.reRender(`		
-				${html}			
-				`,document.getElementById("bookView"));
-			//hide page 1
-			$('#landingPage').hide();
-			$('.carouselLandingPage').hide();
-			$('#bookView').show();
-			$('#bookRecent').hide();
-			$('#bookList').hide();
-			$('#bookCreate').hide();
-		}
-		bookList(){
-			let html = `
-				<br/>
-			  	<nav>
-		    		<div class="nav-wrapper white">
-					<form>
-						<div class="input-field">				
-								<input onkeyup="component.bookListItems(this.value)" id="search" type="search" placeholder="Search" required>
-								<label for="search"><i class="material-icons">search</i></label>
-								<i class="material-icons">close</i>
-						</div>
-					</form>
-					</div>
-				</nav>
-				<br/>
-			`;
-
+	bookListInfo(filter){
+		// console.log(filter);
+		let html = "";
+		// let m = this.movies;
+		let m = this.searchBook(filter);
+		for(let i=0;i<m.length;i++){	
 			html += `
-				<div class="row" id="bookListItems">
+				<tr>
+					<td>${m[i].title}</td>
+					<td>${m[i].year}</td>
+					<td><button class="btn btn-primary"  onclick="component.bookDetails(${i})">Show Details</button></td>
+				</tr>
 			`;
-			let r = this.book;
-			for(let i=0;i<r.length;i++){
-				html+= `
-					<div class="col s12 m4">
-						<div class="card large hoverable">
-							<div class="card-image">
-								<img src="${r[i].photo}">
-								<span class="card-title">${r[i].title}</span>
-							</div>
-							<div class="card-content">
-								<p>${r[i].summary}</p>
-							</div>
-							<div class="card-action">
-								<a href="#" onclick="component.bookView(${r[i].id})">More</a>
-							</div>
-						</div>
-					</div>
-				`;
-			}
-
-			html += `</div>`;
-
-			this.reRender(`
-				${html}
-				`,document.getElementById("bookList"));
-			$('landingPage').hide();
-			$('.carouselLandingPage').hide();
-			$('#bookList').show();
-			$('#bookView').hide();
-			$('#bookRecent').hide();
-			$('#bookCreate').hide();
-				
 		}
-		bookListItems(title){
-			let html = ``;
-			let r = this.findBookByTitle(title);
-			for(let i=0;i<r.length;i++){
-				html+= `
-					<div class="col s12 m4">
-						<div class="card large hoverable">
-							<div class="card-image">
-								<img src="${r[i].photo}">
-								<span class="card-title">${r[i].title}</span>
-							</div>
-							<div class="card-content">
-								<p>${r[i].summary}</p>
-							</div>
-							<div class="card-action">
-								<a href="#" onclick="component.bookView(${r[i].id})">More</a>
-							</div>
-						</div>
-					</div>
-				`;
-			}		
-			this.reRender(`
-				${html}
-				`,document.getElementById("bookListItems"));
-			$('#landingPage').hide();
-			$('.carouselLandingPage').hide();
-			$('#bookList').show();
-			$('#bookView').hide();
-			$('#bookRecent').hide();
-			$('#bookCreate').hide();
-		
-		}
-		bookCreate(){
-			let html = `
-				<div class="row">
-					<form class="col s12">
-					<h5 class="center-align">Create New Book</h5>
-					<button onclick="component.createBook()" class="btn waves-effect waves-light">Save</button>
-						<div class="row">
-							<div class="input-field col s6">
-								<input disabled value="${this.book.length+1}" id="book_id" type="text" class="validate">
-							</div>
-							<div class="input-field col s6">
-								<input id="book_title" type="text" class="validate">
-								<label for="book_title">TITLE</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s6">
-								<input id="book_summary" type="text" class="validate">
-								<label for="book_summary">SUMMARY</label>
-							</div>
-							<div class="input-field col s6">
-								<input id="book_photo" type="text" class="validate">
-								<label for="book_photo">PHOTO</label>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s4">
-								<input id="book_year" type="text" class="validate">
-								<label for="book_year">YEAR</label>
-							</div>
-							<div class="input-field col s4">
-								<input id="book_author" type="text" class="validate">
-								<label for="book_author">AUTHOR</label>
-							</div>
-							<div class="input-field col s4">
-								<input id="book_characters" type="text" class="validate">
-								<label for="book_characters">CHARACTERS</label>
-							</div>
-						</div>
-						`;
+		this.reRender(html,document.getElementById('bookListInfo'));
+	}
 
-			this.reRender(`
-				${html}
-				`,document.getElementById("bookCreate"));
-			$('#landingPage').hide();
-			$('.carouselLandingPage').hide();
-			$('#bookCreate').show();
-			$('#bookList').hide();
-			$('#bookView').hide();
-			$('#bookRecent').hide();
+	bookDetails(key){
+		this.reRender(
+			`
+
+				<h1><center>Book Details</center></h1>
+				<div class="media">
+				    <div class="media-left">
+				        <a href="#">
+				            <img class="media-object img-thumbnail" src="${this.book[key].photo}" width="220" />
+				        </a>
+				    </div>
+				    <div class="media-body" id="bookDetailsInfo">
+				        <h4 class="media-heading">${this.book[key].title}</h4>
+				        Year: ${this.book[key].year}<br/></br>
+				        Author: ${this.book[key].author}<br/></br>
+						Characters: ${this.book[key].characters}<br/></br>
+						Summary: ${this.book[key].summary}<br/></br>
+						<button class="btn btn-info btn-sm" onclick="component.bookUpdate(${key})">Update</button>
+						<button class="btn btn-info btn-sm" onclick="component.deleteBook(${key})">Delete</button>
+						<button class="btn btn-info btn-sm" onclick="component.showBookList()">Back</button>
+					</div>	
+				</div>			
+			`,document.getElementById('bookDetails'));
+			this.showUpdateDelete();
 	}
+
+	bookCreate(){
+		this.render(
+			`
+				<h1><center>Book Create</center></h1>
+				Title: <input class="form-control" id="newTitle" type="" placeholder="Enter Title" /><br/>
+				Year: <input class="form-control" id="newYear" type="" placeholder="Enter Year" /><br/>
+				Director: <input class="form-control" id="newAuthor" type="" placeholder="Enter Director" /><br/>
+				Poster: <input class="form-control" id="newPhoto" type="" placeholder="Enter Poster" /><br/>
+				Actors: <input class="form-control" id="newCharacters" type="" placeholder="Separate using comma" /><br/>
+				Summary: <input class="form-control" id="newSummary" type="" placeholder="Enter Summary" ><br/>
+				<button class="btn btn-primary" onclick="component.createBook()">Create</button>
+			`,document.getElementById('bookCreate'));
 	}
-	let component = new Component();
-	component.landingPage();
+
+	bookUpdate(key){
+
+		this.reRender(
+
+			`
+
+
+
+				<div class="input-group input-group-md">
+		        	<span class="input-group-addon">
+		        		<span>ID</span>
+		        	</span>
+		        	<input readonly class="form-control" type="text" value="${this.book[key].id}" /><br/>
+		        </div>
+		        <br/>
+		        <div class="input-group input-group-md">
+		        	<span class="input-group-addon">
+		        		<span>Title</span>
+		        	</span>
+		        	<input class="form-control" id="updateTitle" type="text" value="${this.book[key].title}" /><br/>
+		        </div>
+		        <br/>
+		        <div class="input-group input-group-md">
+		        	<span class="input-group-addon">
+		        		<span>Year</span>
+		        	</span>
+		        	<input class="form-control" id="updateYear" type="text" value="${this.book[key].year}" /><br/>
+		        </div>
+		        <br/>
+		        <div class="input-group input-group-md">
+		        	<span class="input-group-addon">
+		        		<span>Director</span>
+		        	</span>
+		        	<input class="form-control" id="updateAuthor" type="text" value="${this.book[key].author}" /><br/>
+		        </div>	
+		        <br/>
+		        <div class="input-group input-group-md">
+		        	<span class="input-group-addon">
+		        		<span>Characters</span>
+		        	</span>
+		        	<input class="form-control" id="updateCharacters" type="text" value="${this.book[key].characters}" /><br/>
+		        </div>
+		        </br>
+		        <div class="input-group input-group-md">
+		        	<span class="input-group-addon">
+		        		<span>Summary</span>
+		        	</span>
+		        	<input class="form-control" id="updateSummary" type="text" value="${this.book[key].summary}" /><br/>
+		        </div>	
+				<br/>
+				<br/>
+				<br/>
+				<button class="btn btn-success btn-block" onclick="component.updateBook(${key})">Save</button>
+			`,document.getElementById('bookDetailsInfo'));
+	}
+
+
+	
+}
+
+let component = new Component();
+component.bookList();
+component.bookCreate();
