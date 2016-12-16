@@ -76,8 +76,9 @@ class App{
 		let c = document.getElementById('newAuthor');
 		let v = document.getElementById('newSummary');
 		let b = document.getElementById('newPhoto');
+		let n = document.getElementById('newCharacters');
 
-		let book = {"title":z.value,"year":x.value,"author":c.value,"summary":v.value,"photo":b.value};
+		let book = {"title":z.value,"year":x.value,"author":c.value,"summary":v.value,"photo":b.value,"characters":n.value};
 		this.book.push(book);
 
 		z.value = x.value = c.value = v.value = b.value = ''; //Clear Fields
