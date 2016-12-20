@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Facebook Login</title>
+<title>Fb Page Login</title>
 <meta charset="UTF-8">
 </head>
 <body>
@@ -37,7 +37,7 @@
 
   window.fbAsyncInit = function() {
   FB.init({
-    appId      : '193694197758898';
+    appId      : '193694197758898',
     cookie     : true,  // enable cookies to allow the server to access 
                         // the session
     xfbml      : true,  // parse social plugins on this page
@@ -78,7 +78,7 @@
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name +' your email is ');
       document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';'
+        'Thanks for logging in, ' + response.name + '!';
     });
   }
 </script>
