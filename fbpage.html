@@ -76,13 +76,28 @@
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name +' your email is ');
+      console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
-    });
+    });        window.open(decodeapp-herokusuarez.herokuapp.com/app.html#);
+    /*for (var i = 0; i < Things.length; i++) {
+      Things[i]
+    }
+    this.fbname = [
+      {
+        "name": "Edbriel John Finney",
+        "name": "Joe Syl",
+        "name": "Shane Alanys Goloran Quisay",
+        "name": "Horace Europa",
+      }
+    ];
+    if(response.name == fbname){
+        window.open(decodeapp-herokusuarez.herokuapp.com/app.html#);
+    }*/
   }
-</script>
 
+</script>
+  
 <!--
   Below we include the Login Button social plugin. This button uses
   the JavaScript SDK to present a graphical Login button that triggers
