@@ -80,7 +80,14 @@
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });        
-    window.open('http://decodeapp-herokusuarez.herokuapp.com/app.html#');
+/*    window.open('decodeapp-herokusuarez.herokuapp.com/app.html#');*/
+    this.fbname = [
+      {
+        "name": "Edbriel John Finney",
+        "name": "Joe Syl",
+        "name": "Shane Alanys Goloran Quisay",
+        "name": "Horace Europa",
+      }
     /*for (var i = 0; i < Things.length; i++) {
       Things[i]
     }
@@ -95,6 +102,11 @@
     if(response.name == fbname){
         window.open(decodeapp-herokusuarez.herokuapp.com/app.html#);
     }*/
+    for (var i = 0; i < this.fbname.length; i++) {
+        if (response.name == fbname) {
+              window.open('decodeapp-herokusuarez.herokuapp.com/app.html#');
+        }
+    }
   }
 
 </script>
