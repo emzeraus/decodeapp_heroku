@@ -4,7 +4,7 @@
 <title>Fb Page Login</title>
 <meta charset="UTF-8">
 </head>
-<body background="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT9Z7Ab8TzYxXdWgQaGwr1kg9cls4Bl_nCUhh0k1zc6v8L79wr1">
+<body>
 <script>
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
@@ -25,7 +25,6 @@
         'into Facebook.';
     }
   }
-
   // This function is called when someone finishes with the Login
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
@@ -34,16 +33,14 @@
       statusChangeCallback(response);
     });
   }
-
   window.fbAsyncInit = function() {
   FB.init({
-    appId      : '193694197758898',
+    appId      : '563251983874139',
     cookie     : true,  // enable cookies to allow the server to access 
                         // the session
     xfbml      : true,  // parse social plugins on this page
     version    : 'v2.8' // use graph api version 2.8
   });
-
   // Now that we've initialized the JavaScript SDK, we call 
   // FB.getLoginStatus().  This function gets the state of the
   // person visiting this page and can return one of three states to
@@ -55,13 +52,10 @@
   //    your app or not.
   //
   // These three cases are handled in the callback function.
-
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
   });
-
   };
-
   // Load the SDK asynchronously
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -70,7 +64,6 @@
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
-
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   function testAPI() {
@@ -80,8 +73,8 @@
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });        
-  window.open('https://decodeapp-herokusuarez.herokuapp.com/app.html#');
-   /* this.fbname = [
+  window.open('https://decodeapp-herokufinney.herokuapp.com/app.html#');
+    this.fbname = [
       {
         "name": "Edbriel John Finney",
         "name": "Joe Syl",
@@ -94,7 +87,7 @@
           window.open('https://decodeapp-herokusuarez.herokuapp.com/app.html#');
       }
     }
-    } */
+    }
 </script>
   
 <!--
